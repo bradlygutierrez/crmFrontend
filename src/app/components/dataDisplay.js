@@ -1,6 +1,7 @@
+// DataDisplay.js
 import React from 'react';
 
-const DataDisplay = ({ title, data }) => {
+const DataDisplay = ({ title, data, onRowClick }) => {
   return (
     <div className="bg-white shadow-md rounded-lg p-6 mb-8">
       <h2 className="text-xl font-bold text-gray-800 mb-4">{title}</h2>
@@ -21,7 +22,7 @@ const DataDisplay = ({ title, data }) => {
           </thead>
           <tbody>
             {data.map((item, index) => (
-              <tr key={index} className="hover:bg-gray-50">
+              <tr key={index} className="hover:bg-gray-50 cursor-pointer" onClick={() => onRowClick(item)}>
                 {Object.values(item).map((val, i) => (
                   <td
                     key={i}
