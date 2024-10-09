@@ -1,6 +1,7 @@
+// FormPopupEmpresa.js
 import React from 'react';
 
-export default function FormPopupServicios({ isOpen, onClose, onSubmit, initialValues }) {
+export default function FormPopupEmpresa({ isOpen, onClose, onSubmit, initialValues }) {
   if (!isOpen) return null; // Si no está abierto, no renderizar nada
 
   const handleSubmit = (event) => {
@@ -14,35 +15,45 @@ export default function FormPopupServicios({ isOpen, onClose, onSubmit, initialV
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded shadow-lg w-full max-w-3xl">
-        <h2 className="text-lg font-semibold text-black mb-4">Editar Servicio</h2>
+        <h2 className="text-lg font-semibold text-black mb-4">Editar Empresa</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block mb-2 text-black">Nombre del Servicio:</label>
+            <label className="block mb-2 text-black">Nombre de la Empresa:</label>
             <input
               type="text"
-              name="nombre_servicio"
+              name="nombre_empresa"
               required
-              defaultValue={initialValues ? initialValues.nombre_servicio : ''}
+              defaultValue={initialValues ? initialValues.nombre_empresa : ''}
               className="border rounded p-2 w-full text-black"
             />
           </div>
           <div>
-            <label className="block mb-2 text-black">Costo del Servicio:</label>
+            <label className="block mb-2 text-black">Dirección:</label>
             <input
-              type="number"
-              name="costo_servicio"
+              type="text"
+              name="direccion"
               required
-              defaultValue={initialValues ? initialValues.costo_servicio : ''}
+              defaultValue={initialValues ? initialValues.direccion : ''}
               className="border rounded p-2 w-full text-black"
             />
           </div>
           <div>
-            <label className="block mb-2 text-black">Duración del Servicio (min):</label>
+            <label className="block mb-2 text-black">Teléfono:</label>
             <input
-              type="number"
-              name="duracion_servicio"
+              type="tel"
+              name="telefono"
               required
-              defaultValue={initialValues ? initialValues.duracion_servicio : ''}
+              defaultValue={initialValues ? initialValues.telefono : ''}
+              className="border rounded p-2 w-full text-black"
+            />
+          </div>
+          <div>
+            <label className="block mb-2 text-black">Email:</label>
+            <input
+              type="email"
+              name="email"
+              required
+              defaultValue={initialValues ? initialValues.email : ''}
               className="border rounded p-2 w-full text-black"
             />
           </div>

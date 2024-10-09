@@ -1,7 +1,6 @@
-// FormPopupVentas.js
-import React, { useEffect } from 'react';
+import React from 'react';
 
-export default function FormPopup({ isOpen, onClose, onSubmit, initialValues }) {
+export default function FormPopupCitas({ isOpen, onClose, onSubmit, initialValues }) {
   if (!isOpen) return null; // Si no está abierto, no renderizar nada
 
   const handleSubmit = (event) => {
@@ -15,46 +14,67 @@ export default function FormPopup({ isOpen, onClose, onSubmit, initialValues }) 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded shadow-lg w-full max-w-3xl">
-        <h2 className="text-lg font-semibold text-black mb-4">Editar Venta</h2>
+        <h2 className="text-lg font-semibold text-black mb-4">Editar Cita</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block mb-2 text-black">Cliente:</label>
+            <label className="block mb-2 text-black">Nombre del Paciente:</label>
             <input
               type="text"
-              name="cliente"
+              name="nombre_paciente"
               required
-              defaultValue={initialValues ? initialValues.nombre_cliente : ''}
+              defaultValue={initialValues ? initialValues.nombre_paciente : ''}
               className="border rounded p-2 w-full text-black"
               readOnly // Este campo puede ser solo lectura si no deseas que se edite
             />
           </div>
           <div>
-            <label className="block mb-2 text-black">Fecha de Venta:</label>
-            <input
-              type="date"
-              name="fecha_venta"
-              required
-              defaultValue={initialValues ? initialValues.fecha_venta : ''}
-              className="border rounded p-2 w-full text-black"
-            />
-          </div>
-          <div>
-            <label className="block mb-2 text-black">Monto de Venta:</label>
-            <input
-              type="number"
-              name="monto_venta"
-              required
-              defaultValue={initialValues ? initialValues.monto_venta : ''}
-              className="border rounded p-2 w-full text-black"
-            />
-          </div>
-          <div>
-            <label className="block mb-2 text-black">Estado de Venta:</label>
+            <label className="block mb-2 text-black">Nombre del Servicio:</label>
             <input
               type="text"
-              name="estado_venta"
+              name="nombre_servicio"
               required
-              defaultValue={initialValues ? initialValues.estado_venta : ''}
+              defaultValue={initialValues ? initialValues.nombre_servicio : ''}
+              className="border rounded p-2 w-full text-black"
+              readOnly // Este campo puede ser solo lectura si no deseas que se edite
+            />
+          </div>
+          <div>
+            <label className="block mb-2 text-black">Fecha de Cita:</label>
+            <input
+              type="date"
+              name="fecha_cita"
+              required
+              defaultValue={initialValues ? initialValues.fecha_cita : ''}
+              className="border rounded p-2 w-full text-black"
+            />
+          </div>
+          <div>
+            <label className="block mb-2 text-black">Hora de Cita:</label>
+            <input
+              type="time"
+              name="hora_cita"
+              required
+              defaultValue={initialValues ? initialValues.hora_cita : ''}
+              className="border rounded p-2 w-full text-black"
+            />
+          </div>
+          <div>
+            <label className="block mb-2 text-black">Costo del Servicio:</label>
+            <input
+              type="number"
+              name="costo_servicio"
+              required
+              defaultValue={initialValues ? initialValues.costo_servicio : ''}
+              className="border rounded p-2 w-full text-black"
+            />
+          </div>
+          <div>
+            <label className="block mb-2 text-black">Estado de Cita:</label>
+            <input
+              type="text"
+              name="estado_cita"
+              required
+              defaultValue={initialValues ? initialValues.estado_cita : ''}
               className="border rounded p-2 w-full text-black"
             />
           </div>

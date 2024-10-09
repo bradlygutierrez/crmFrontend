@@ -1,40 +1,40 @@
-// Clientes.js
+// Ventas.js
 'use client';
 import { useEffect, useState } from 'react';
 import DataDisplay from '@/app/components/dataDisplay';
-import EditCreateButton from '@/app/components/CreateButton';
-import FormPopup from '@/app/components/FormPopup'; // Asegúrate de que esto apunta a tu componente de formulario
+import FormPopup from '@/app/components/FormPopupVentas'; // Asegúrate de que esto apunta a tu componente de formulario
+import EditCreateButton from '@/app/components/CreateButton'; // Asegúrate de importar el botón adecuado
 
-export default function Clientes() {
-  const [clientes, setClientes] = useState([]);
-  const [selectedClient, setSelectedClient] = useState(null); // Estado para la fila seleccionada
+export default function Ventas() {
+  const [ventas, setVentas] = useState([]);
+  const [selectedVenta, setSelectedVenta] = useState(null); // Estado para la fila seleccionada
   const [isEditing, setIsEditing] = useState(false); // Estado para controlar el popup de edición
   const [isCreating, setIsCreating] = useState(false); // Estado para controlar el popup de creación
 
   useEffect(() => {
-    async function fetchClientes() {
-      const response = await fetch('http://localhost:8000/clientes');
+    async function fetchVentas() {
+      const response = await fetch('http://localhost:8000/citas'); // Cambia la URL por tu API real
       const data = await response.json();
-      setClientes(data);
+      setVentas(data);
     }
 
-    fetchClientes();
+    fetchVentas();
   }, []);
 
-  const handleRowClick = (client) => {
-    setSelectedClient(client);
+  const handleRowClick = (venta) => {
+    setSelectedVenta(venta);
     setIsEditing(true); // Abrir el popup de edición
   };
 
-  // Nueva función para manejar la apertura del popup vacío para crear un cliente
+  // Nueva función para manejar la apertura del popup vacío para crear una venta
   const handleCreateClick = () => {
-    setSelectedClient(null); // Asegúrate de que no hay un cliente seleccionado
+    setSelectedVenta(null); // Asegúrate de que no hay una venta seleccionada
     setIsCreating(true); // Abrir el popup de creación
   };
 
   const handleEditSubmit = async (data) => {
     try {
-      const response = await fetch(`http://localhost:8000/clientes/${selectedClient.id_cliente}`, {
+      const response = await fetch(`http://localhost:8000/citas/${selectedVenta.id_cita}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -45,11 +45,11 @@ export default function Clientes() {
       if (!response.ok) {
         throw new Error('Error al actualizar los datos');
       }
-      const updatedClient = await response.json();
-      // Actualiza la lista de clientes
-      setClientes((prevClientes) => prevClientes.map(client => client.id_cliente === updatedClient.id_cliente ? updatedClient : client));
+      const updatedVenta = await response.json();
+      // Actualiza la lista de ventas
+      setVentas((prevVentas) => prevVentas.map(venta => venta.id_cita === updatedVenta.id_cita ? updatedVenta : venta));
       setIsEditing(false);
-      setSelectedClient(null); // Limpiar la selección
+      setSelectedVenta(null); // Limpiar la selección
     } catch (error) {
       console.error('Error:', error);
     }
@@ -57,7 +57,7 @@ export default function Clientes() {
 
   const handleCreateSubmit = async (data) => {
     try {
-      const response = await fetch('http://localhost:8000/clientes', {
+      const response = await fetch('http://localhost:8000/citas', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,11 +66,11 @@ export default function Clientes() {
       });
 
       if (!response.ok) {
-        throw new Error('Error al crear el cliente');
+        throw new Error('Error al crear la venta');
       }
-      const newClient = await response.json();
-      // Agregar el nuevo cliente a la lista
-      setClientes((prevClientes) => [...prevClientes, newClient]);
+      const newVenta = await response.json();
+      // Agregar la nueva venta a la lista
+      setVentas((prevVentas) => [...prevVentas, newVenta]);
       setIsCreating(false); // Cerrar el popup
     } catch (error) {
       console.error('Error:', error);
@@ -80,22 +80,22 @@ export default function Clientes() {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <EditCreateButton 
-        nameCreate="Cliente" 
+        nameCreate="Cita" 
         handleCreate={handleCreateClick} 
         handleEdit={() => setIsEditing(true)} 
       />
-      <DataDisplay title="Clientes" data={clientes} onRowClick={handleRowClick} />
+      <DataDisplay title="Citas" data={ventas} onRowClick={handleRowClick} />
       <FormPopup
         isOpen={isEditing}
         onClose={() => setIsEditing(false)}
         onSubmit={handleEditSubmit}
-        initialValues={selectedClient} // Pasar los valores iniciales al formulario
+        initialValues={selectedVenta} // Pasar los valores iniciales al formulario
       />
       <FormPopup
         isOpen={isCreating}
         onClose={() => setIsCreating(false)}
         onSubmit={handleCreateSubmit}
-        initialValues={selectedClient} // Aquí no es necesario, ya que se abre vacío
+        initialValues={selectedVenta} // Aquí no es necesario, ya que se abre vacío
       />
     </div>
   );

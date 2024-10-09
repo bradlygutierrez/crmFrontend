@@ -8,7 +8,7 @@ export default function DashBoardItem({ nombre, url, icon }) {
                 alt={`${nombre} GIF`}
                 className="w-7 h-7 object-cover" // Adjust size as needed
             />
-            <span className="mx-2 text-sm font-medium">{nombre}</span>
+            <span className="mx-2 text-sm font-medium flex flex-col">{nombre}</span>
         </Link>
     );
 }

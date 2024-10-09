@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function FormPopupPacientes({ isOpen, onClose, onSubmit, initialValues }) {
+export default function FormPopupContacto({ isOpen, onClose, onSubmit, initialValues }) {
   if (!isOpen) return null; // Si no está abierto, no renderizar nada
 
   const handleSubmit = (event) => {
@@ -14,73 +14,68 @@ export default function FormPopupPacientes({ isOpen, onClose, onSubmit, initialV
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded shadow-lg w-full max-w-3xl">
-        <h2 className="text-lg font-semibold text-black mb-4">Editar Paciente</h2>
+        <h2 className="text-lg font-semibold text-black mb-4">Editar Contacto</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block mb-2 text-black">Nombre del Paciente:</label>
+            <label className="block mb-2 text-black">Nombre:</label>
             <input
               type="text"
-              name="nombre_paciente"
+              name="nombre_contacto"
               required
-              defaultValue={initialValues ? initialValues.nombre_paciente : ''}
+              defaultValue={initialValues ? initialValues.nombre_contacto : ''}
               className="border rounded p-2 w-full text-black"
             />
           </div>
           <div>
-            <label className="block mb-2 text-black">Fecha de Nacimiento:</label>
-            <input
-              type="date"
-              name="fecha_nacimiento"
-              required
-              defaultValue={initialValues ? initialValues.fecha_nacimiento : ''}
-              className="border rounded p-2 w-full text-black"
-            />
-          </div>
-          <div>
-            <label className="block mb-2 text-black">Email del Paciente:</label>
-            <input
-              type="email"
-              name="email_paciente"
-              required
-              defaultValue={initialValues ? initialValues.email_paciente : ''}
-              className="border rounded p-2 w-full text-black"
-            />
-          </div>
-          <div>
-            <label className="block mb-2 text-black">Teléfono del Paciente:</label>
+            <label className="block mb-2 text-black">Teléfono:</label>
             <input
               type="tel"
-              name="telefono_paciente"
-              defaultValue={initialValues ? initialValues.telefono_paciente : ''}
-              className="border rounded p-2 w-full text-black"
-            />
-          </div>
-          <div>
-            <label className="block mb-2 text-black">Fecha de Registro:</label>
-            <input
-              type="date"
-              name="fecha_registro"
+              name="telefono_contacto"
               required
-              defaultValue={initialValues ? initialValues.fecha_registro : ''}
+              defaultValue={initialValues ? initialValues.telefono_contacto : ''}
               className="border rounded p-2 w-full text-black"
             />
           </div>
           <div>
-            <label className="block mb-2 text-black">Historial Médico:</label>
-            <textarea
-              name="historial_medico"
-              defaultValue={initialValues ? initialValues.historial_medico : ''}
+            <label className="block mb-2 text-black">Email:</label>
+            <input
+              type="email"
+              name="email_contacto"
+              required
+              defaultValue={initialValues ? initialValues.email_contacto : ''}
               className="border rounded p-2 w-full text-black"
-              rows="4"
             />
           </div>
           <div>
-            <label className="block mb-2 text-black">Nota del Paciente:</label>
-            <textarea
-              name="nota_paciente"
-              defaultValue={initialValues ? initialValues.nota_paciente : ''}
+            <label className="block mb-2 text-black">Cargo:</label>
+            <input
+              type="text"
+              name="cargo"
+              required
+              defaultValue={initialValues ? initialValues.cargo : ''}
               className="border rounded p-2 w-full text-black"
-              rows="4"
+            />
+          </div>
+          <div>
+            <label className="block mb-2 text-black">Nombre de la Empresa:</label>
+            <input
+              type="text"
+              name="nombre_empresa"
+              required
+              defaultValue={initialValues ? initialValues.nombre_empresa : ''}
+              className="border rounded p-2 w-full text-black"
+              readOnly // Cambia esto si deseas que el usuario pueda editar el nombre de la empresa
+            />
+          </div>
+          <div>
+            <label className="block mb-2 text-black">Tipo de Empresa:</label>
+            <input
+              type="text"
+              name="tipo_empresa"
+              required
+              defaultValue={initialValues ? initialValues.tipo_empresa : ''}
+              className="border rounded p-2 w-full text-black"
+              readOnly // Cambia esto si deseas que el usuario pueda editar el tipo de empresa
             />
           </div>
           <div className="col-span-2">

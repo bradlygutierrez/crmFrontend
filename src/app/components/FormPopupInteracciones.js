@@ -1,7 +1,6 @@
-// FormPopupInteracciones.js
-import React, { useEffect } from 'react';
+import React from 'react';
 
-export default function FormPopup({ isOpen, onClose, onSubmit, initialValues }) {
+export default function FormPopupInteracciones({ isOpen, onClose, onSubmit, initialValues }) {
   if (!isOpen) return null; // Si no está abierto, no renderizar nada
 
   const handleSubmit = (event) => {
@@ -18,12 +17,12 @@ export default function FormPopup({ isOpen, onClose, onSubmit, initialValues }) 
         <h2 className="text-lg font-semibold text-black mb-4">Editar Interacción</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block mb-2 text-black">Nombre del Cliente:</label>
+            <label className="block mb-2 text-black">Nombre del Paciente:</label>
             <input
               type="text"
-              name="nombre_cliente"
+              name="nombre_paciente"
               required
-              defaultValue={initialValues ? initialValues.nombre_cliente : ''}
+              defaultValue={initialValues ? initialValues.nombre_paciente : ''}
               className="border rounded p-2 w-full text-black"
               readOnly // Este campo puede ser solo lectura si no deseas que se edite
             />
