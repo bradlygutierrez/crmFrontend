@@ -4,18 +4,27 @@ import { useEffect, useState } from 'react';
 import DataDisplay from '@/app/components/dataDisplay';
 import EditCreateButton from '@/app/components/CreateButton';
 import FormPopup from '@/app/components/FormPopup'; // Asegúrate de que esto apunta a tu componente de formulario
+import TableSkeleton from '@/app/components/TableLoadingSkeleton';
 
 export default function Clientes() {
   const [clientes, setClientes] = useState([]);
-  const [selectedClient, setSelectedClient] = useState(null); // Estado para la fila seleccionada
-  const [isEditing, setIsEditing] = useState(false); // Estado para controlar el popup de edición
-  const [isCreating, setIsCreating] = useState(false); // Estado para controlar el popup de creación
+  const [selectedClient, setSelectedClient] = useState(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchClientes() {
-      const response = await fetch('http://localhost:8000/pacientes');
-      const data = await response.json();
-      setClientes(data);
+      try {
+        const response = await fetch('http://localhost:8000/pacientes');
+        if (!response.ok) throw new Error('Error al obtener los datos');
+        const data = await response.json();
+        setClientes(data);
+      } catch (error) {
+        console.error('Error:', error);
+      } finally {
+        setLoading(false);
+      }
     }
 
     fetchClientes();
@@ -23,13 +32,14 @@ export default function Clientes() {
 
   const handleRowClick = (client) => {
     setSelectedClient(client);
-    setIsEditing(true); // Abrir el popup de edición
+    setIsCreating(false); // Edición
+    setIsPopupOpen(true);
   };
 
-  // Nueva función para manejar la apertura del popup vacío para crear un cliente
   const handleCreateClick = () => {
-    setSelectedClient(null); // Asegúrate de que no hay un cliente seleccionado
-    setIsCreating(true); // Abrir el popup de creación
+    setSelectedClient(null); // Vaciar la selección
+    setIsCreating(true); // Crear
+    setIsPopupOpen(true);
   };
 
   const handleEditSubmit = async (data) => {
@@ -42,14 +52,14 @@ export default function Clientes() {
         body: JSON.stringify(data),
       });
 
-      if (!response.ok) {
-        throw new Error('Error al actualizar los datos');
-      }
+      if (!response.ok) throw new Error('Error al actualizar los datos');
       const updatedClient = await response.json();
-      // Actualiza la lista de clientes
-      setClientes((prevClientes) => prevClientes.map(client => client.id_paciente === updatedClient.id_paciente ? updatedClient : client));
-      setIsEditing(false);
-      setSelectedClient(null); // Limpiar la selección
+
+      // Actualizar el cliente en el estado
+      setClientes((prevClientes) =>
+        prevClientes.map(client => client.id_paciente === updatedClient.id_paciente ? updatedClient : client)
+      );
+      setIsPopupOpen(false);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -65,37 +75,28 @@ export default function Clientes() {
         body: JSON.stringify(data),
       });
 
-      if (!response.ok) {
-        throw new Error('Error al crear el paciente');
-      }
+      if (!response.ok) throw new Error('Error al crear el paciente');
       const newClient = await response.json();
-      // Agregar el nuevo cliente a la lista
+
+      // Agregar el nuevo cliente al estado
       setClientes((prevClientes) => [...prevClientes, newClient]);
-      setIsCreating(false); // Cerrar el popup
+      setIsPopupOpen(false);
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
+  if (loading) return <TableSkeleton></TableSkeleton>;
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <EditCreateButton 
-        nameCreate="Paciente" 
-        handleCreate={handleCreateClick} 
-        handleEdit={() => setIsEditing(true)} 
-      />
+      <EditCreateButton nameCreate="Paciente" handleCreate={handleCreateClick} />
       <DataDisplay title="Pacientes" data={clientes} onRowClick={handleRowClick} />
       <FormPopup
-        isOpen={isEditing}
-        onClose={() => setIsEditing(false)}
-        onSubmit={handleEditSubmit}
-        initialValues={selectedClient} // Pasar los valores iniciales al formulario
-      />
-      <FormPopup
-        isOpen={isCreating}
-        onClose={() => setIsCreating(false)}
-        onSubmit={handleCreateSubmit}
-        initialValues={selectedClient} // Aquí no es necesario, ya que se abre vacío
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        onSubmit={isCreating ? handleCreateSubmit : handleEditSubmit}
+        initialValues={isCreating ? null : selectedClient}
       />
     </div>
   );

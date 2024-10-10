@@ -34,7 +34,7 @@ export default function Productos() {
 
   const handleEditSubmit = async (data) => {
     try {
-      const response = await fetch(`http://localhost:8000/servicios/${selectedProducto.id_producto}`, {
+      const response = await fetch(`http://localhost:8000/servicios/${selectedProducto.id_servicio}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ export default function Productos() {
       }
       const updatedProducto = await response.json();
       // Actualiza la lista de productos
-      setProductos((prevProductos) => prevProductos.map(producto => producto.id_producto === updatedProducto.id_producto ? updatedProducto : producto));
+      setProductos((prevProductos) => prevProductos.map(producto => producto.id_servicio === updatedProducto.id_servicio ? updatedProducto : producto));
       setIsEditing(false);
       setSelectedProducto(null); // Limpiar la selección
     } catch (error) {

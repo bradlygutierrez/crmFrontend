@@ -64,18 +64,6 @@ export default function FormPopupContacto({ isOpen, onClose, onSubmit, initialVa
               required
               defaultValue={initialValues ? initialValues.nombre_empresa : ''}
               className="border rounded p-2 w-full text-black"
-              readOnly // Cambia esto si deseas que el usuario pueda editar el nombre de la empresa
-            />
-          </div>
-          <div>
-            <label className="block mb-2 text-black">Tipo de Empresa:</label>
-            <input
-              type="text"
-              name="tipo_empresa"
-              required
-              defaultValue={initialValues ? initialValues.tipo_empresa : ''}
-              className="border rounded p-2 w-full text-black"
-              readOnly // Cambia esto si deseas que el usuario pueda editar el tipo de empresa
             />
           </div>
           <div className="col-span-2">

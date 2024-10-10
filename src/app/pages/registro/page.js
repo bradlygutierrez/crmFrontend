@@ -17,7 +17,7 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validar contraseñas
     if (formData.password !== formData.confirmPassword) {
       alert('Las contraseñas no coinciden');
@@ -44,20 +44,27 @@ export default function Register() {
       const result = await response.json();
       alert(result.message);
 
+      if (response.ok) {
+        window.location.href = '/page.js';
+      }
+
     } catch (error) {
       console.error('Error en el registro:', error);
     }
+
+
+
   };
 
   return (
-    <div className="flex h-screen">
-      <div className="w-1/2 bg-blue-600 flex flex-col justify-start items-center p-8">
-        <h1 className="text-white text-4xl font-bold mb-8 p-12">Bienvenido a G&B CRM!</h1>
-        <div className="bg-gray-300 w-64 h-40 mt-auto mb-auto"></div>
+    <div className=" h-screen flex flex-col w-full align-middle  ">
+      <div className="w-full  flex flex-col justify-start items-center mb-0 p-0">
+        <h1 className="text-gray-600 text-4xl font-bold">Bienvenido a CLIN MED CRM!</h1>
+        <div className="w-[7rem] h-[10rem] bg-[url('/clinmed.png')] bg-contain bg-no-repeat bg-center "></div>
       </div>
 
-      <div className="w-1/2 flex justify-center items-center">
-        <form className="bg-white shadow-lg p-8 rounded-lg w-96" onSubmit={handleSubmit}>
+      <div className="w-full flex justify-center items-center">
+        <form className="bg-white shadow-lg p-8 rounded-lg w-1/3" onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nombre">
               Nombre

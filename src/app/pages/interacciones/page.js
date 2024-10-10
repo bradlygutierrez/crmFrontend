@@ -84,6 +84,11 @@ export default function Interacciones() {
         handleCreate={handleCreateClick} 
         handleEdit={() => setIsEditing(true)} 
       />
+      <div className="w-1/2 h-full">
+        <p className="text-sm text-black">
+          Nota, los tipos de interacciones son: consulta, urgente y seguimiento.
+        </p>
+      </div>
       <DataDisplay title="Interacciones" data={interacciones} onRowClick={handleRowClick} />
       <FormPopup
         isOpen={isEditing}

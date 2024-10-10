@@ -14,7 +14,7 @@ export default function FormPopupCitas({ isOpen, onClose, onSubmit, initialValue
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded shadow-lg w-full max-w-3xl">
-        <h2 className="text-lg font-semibold text-black mb-4">Editar Cita</h2>
+        <h2 className="text-lg font-semibold text-black mb-4">{initialValues ? "Editar Cita" : "Registrar Cita"}</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block mb-2 text-black">Nombre del Paciente:</label>
@@ -24,7 +24,6 @@ export default function FormPopupCitas({ isOpen, onClose, onSubmit, initialValue
               required
               defaultValue={initialValues ? initialValues.nombre_paciente : ''}
               className="border rounded p-2 w-full text-black"
-              readOnly // Este campo puede ser solo lectura si no deseas que se edite
             />
           </div>
           <div>
@@ -35,7 +34,6 @@ export default function FormPopupCitas({ isOpen, onClose, onSubmit, initialValue
               required
               defaultValue={initialValues ? initialValues.nombre_servicio : ''}
               className="border rounded p-2 w-full text-black"
-              readOnly // Este campo puede ser solo lectura si no deseas que se edite
             />
           </div>
           <div>
@@ -58,16 +56,7 @@ export default function FormPopupCitas({ isOpen, onClose, onSubmit, initialValue
               className="border rounded p-2 w-full text-black"
             />
           </div>
-          <div>
-            <label className="block mb-2 text-black">Costo del Servicio:</label>
-            <input
-              type="number"
-              name="costo_servicio"
-              required
-              defaultValue={initialValues ? initialValues.costo_servicio : ''}
-              className="border rounded p-2 w-full text-black"
-            />
-          </div>
+          
           <div>
             <label className="block mb-2 text-black">Estado de Cita:</label>
             <input
@@ -79,8 +68,8 @@ export default function FormPopupCitas({ isOpen, onClose, onSubmit, initialValue
             />
           </div>
           <div className="col-span-2">
-            <button type="submit" className="bg-blue-500 text-black px-4 py-2 rounded hover:bg-blue-600">
-              Guardar Cambios
+            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+              {initialValues ? "Guardar Cambios" : "Registrar Cita"}
             </button>
             <button type="button" onClick={onClose} className="ml-2 bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400">
               Cancelar

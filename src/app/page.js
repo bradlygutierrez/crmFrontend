@@ -45,28 +45,28 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex h-screen items-center">
+    <div className="flex flex-col h-screen items-center align-middle">
       {/* Sección izquierda */}
-      <div className="w-1/2 bg-blue-600 flex flex-col justify-between items-center h-full">
-        <div className="flex flex-col justify-center w-full p-8">
-          <h1 className="text-white text-4xl font-bold mb-8 text-center p-12">
-            ¡Bienvenido a G&B CRM!
+      <div className="w-1/2 flex flex-col items-center h-ful">
+        <div className=" flex flex-col justify-center w-full pt-10">
+          <h1 className="text-gray-700 text-4xl font-bold  text-center">
+            ¡Bienvenido al CRM de CLIN MED!
           </h1>
         </div>
-        <div className="flex-grow flex justify-center items-center w-full">
-          <div className="bg-gray-300 h-40 w-64"></div> {/* Cuadro gris */}
+        <div className="flex-grow flex justify-center items-center w-full mb-5">
+          <div className="w-[7rem] h-[11rem] bg-[url('/clinmed.png')] bg-contain bg-no-repeat bg-center "></div> {/* Cuadro gris */}
         </div>
       </div>
 
       {/* Sección derecha */}
-      <div className="w-1/2 flex justify-center items-center min-h-screen">
+      <div className="flex justify-center items-center ">
         <form
           onSubmit={handleLogin}
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8"
+          className="bg-white shadow-md rounded px-16 pt-12 pb-8 h-[calc(100%+10%)] "
         >
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-gray-700 text-base font-bold mb-2"
               htmlFor="email"
             >
               Email
@@ -84,7 +84,7 @@ export default function LoginPage() {
 
           <div className="mb-6">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-gray-700 text-base font-bold mb-2"
               htmlFor="contraseña"
             >
               Contraseña
@@ -104,9 +104,9 @@ export default function LoginPage() {
             <p className="text-red-500 text-xs italic mb-4">{error}</p>
           )}
 
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col items-center w-full">
             <button
-              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[40%]"
               type="submit"
               disabled={loading}
             >
@@ -114,8 +114,8 @@ export default function LoginPage() {
             </button>
           </div>
 
-          <div className="mt-4 text-center">
-            <p className="text-sm text-gray-600">
+          <div className="mt-5 text-center ">
+            <p className="text-sm text-gray-600 mb-2">
               ¿No tienes cuenta?{" "}
               <Link href="/pages/registro" className="text-blue-600">
                 Regístrate aquí

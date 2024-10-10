@@ -57,32 +57,38 @@ export default function Ventas() {
 
   const handleCreateSubmit = async (data) => {
     try {
+      // No anides 'data' dentro de otro objeto
       const response = await fetch('http://localhost:8000/citas', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data), // Envía 'data' directamente
       });
 
+      console.log(data); // Agrega esta línea para verificar los datos enviados
+
       if (!response.ok) {
-        throw new Error('Error al crear la venta');
+        const error = await response.json();
+        throw new Error(error.message || 'Error al crear la cita');
       }
+
       const newVenta = await response.json();
-      // Agregar la nueva venta a la lista
       setVentas((prevVentas) => [...prevVentas, newVenta]);
-      setIsCreating(false); // Cerrar el popup
+      setIsCreating(false);
     } catch (error) {
-      console.error('Error:', error);
+      setErrorMessage(error.message);
     }
   };
 
+
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <EditCreateButton 
-        nameCreate="Cita" 
-        handleCreate={handleCreateClick} 
-        handleEdit={() => setIsEditing(true)} 
+      <EditCreateButton
+        nameCreate="Cita"
+        handleCreate={handleCreateClick}
+        handleEdit={() => setIsEditing(true)}
       />
       <DataDisplay title="Citas" data={ventas} onRowClick={handleRowClick} />
       <FormPopup

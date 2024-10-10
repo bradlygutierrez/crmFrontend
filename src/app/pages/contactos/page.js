@@ -40,6 +40,7 @@ export default function Contacto() {
         },
         body: JSON.stringify(data),
       });
+      
 
       if (!response.ok) {
         throw new Error('Error al actualizar los datos');
@@ -62,6 +63,7 @@ export default function Contacto() {
         },
         body: JSON.stringify(data),
       });
+      console.log(data)
 
       if (!response.ok) {
         throw new Error('Error al crear el contacto');

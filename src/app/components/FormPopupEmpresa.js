@@ -48,6 +48,16 @@ export default function FormPopupEmpresa({ isOpen, onClose, onSubmit, initialVal
             />
           </div>
           <div>
+            <label className="block mb-2 text-black">Tipo de Empresa:</label>
+            <input
+              name="tipo_empresa"
+              required
+              defaultValue={initialValues ? initialValues.tipo_empresa : ''}
+              className="border rounded p-2 w-full text-black"
+            />
+          </div>
+          
+          <div>
             <label className="block mb-2 text-black">Email:</label>
             <input
               type="email"

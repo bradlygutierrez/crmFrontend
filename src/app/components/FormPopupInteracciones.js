@@ -24,7 +24,7 @@ export default function FormPopupInteracciones({ isOpen, onClose, onSubmit, init
               required
               defaultValue={initialValues ? initialValues.nombre_paciente : ''}
               className="border rounded p-2 w-full text-black"
-              readOnly // Este campo puede ser solo lectura si no deseas que se edite
+               // Este campo puede ser solo lectura si no deseas que se edite
             />
           </div>
           <div>
@@ -51,9 +51,19 @@ export default function FormPopupInteracciones({ isOpen, onClose, onSubmit, init
             <label className="block mb-2 text-black">Tipo de Interacción:</label>
             <input
               type="text"
-              name="nombre_tipo_interaccion"
+              name="nombre_tipoInteraccion"
               required
-              defaultValue={initialValues ? initialValues.nombre_tipo_interaccion : ''}
+              defaultValue={initialValues ? initialValues.nombre_tipoInteraccion : ''}
+              className="border rounded p-2 w-full text-black"
+            />
+          </div>
+          <div>
+            <label className="block mb-2 text-black">Nombre de usuario:</label>
+            <input
+              type="text"
+              name="nombre_usuario"
+              required
+              defaultValue={initialValues ? initialValues.nombre_usuario : ''}
               className="border rounded p-2 w-full text-black"
             />
           </div>
