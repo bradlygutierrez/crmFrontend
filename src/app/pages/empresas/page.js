@@ -69,6 +69,7 @@ export default function Empresa() {
       const newEmpresa = await response.json();
       setEmpresas((prevEmpresas) => [...prevEmpresas, newEmpresa]);
       setIsCreating(false);
+      window.location.reload();
     } catch (error) {
       console.error('Error:', error);
     }

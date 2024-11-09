@@ -71,6 +71,7 @@ export default function Contacto() {
       const newContacto = await response.json();
       setContactos((prevContactos) => [...prevContactos, newContacto]);
       setIsCreating(false);
+      window.location.reload();
     } catch (error) {
       console.error('Error:', error);
     }

@@ -25,6 +25,7 @@ export default function LoginPage() {
           email_usuario: email,
           contraseña: password,
         }),
+        credentials: 'include', // Esto es clave para enviar las cookies
       });
 
       const data = await res.json();

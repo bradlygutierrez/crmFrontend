@@ -9,7 +9,7 @@ const DataDisplay = ({ title, data, onRowClick }) => {
         <table className="min-w-full table-auto">
           <thead>
             <tr>
-              {data.length > 0 &&
+              {data.length > 0 ?
                 Object.keys(data[0]).map((key) => (
                   <th
                     key={key}
@@ -17,11 +17,11 @@ const DataDisplay = ({ title, data, onRowClick }) => {
                   >
                     {key}
                   </th>
-                ))}
+                )): <h1>No hay datos disponibles</h1>}
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => (
+            {data.length >= 0 ? data.map((item, index) => (
               <tr key={index} className="hover:bg-gray-50 cursor-pointer" onClick={() => onRowClick(item)}>
                 {Object.values(item).map((val, i) => (
                   <td
@@ -32,7 +32,7 @@ const DataDisplay = ({ title, data, onRowClick }) => {
                   </td>
                 ))}
               </tr>
-            ))}
+            )): <h1>Ingresa datos por favor</h1>}
           </tbody>
         </table>
       </div>

@@ -69,6 +69,7 @@ export default function Formulario() {
       const newFormulario = await response.json();
       setFormularios((prevFormularios) => [...prevFormularios, newFormulario]);
       setIsCreating(false);
+      window.location.reload();
     } catch (error) {
       console.error('Error:', error);
     }

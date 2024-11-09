@@ -72,6 +72,7 @@ export default function Interacciones() {
       // Agregar la nueva interacción a la lista
       setInteracciones((prevInteracciones) => [...prevInteracciones, newInteraccion]);
       setIsCreating(false); // Cerrar el popup
+      window.location.reload();
     } catch (error) {
       console.error('Error:', error);
     }

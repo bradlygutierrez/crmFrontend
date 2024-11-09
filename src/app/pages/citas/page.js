@@ -76,6 +76,7 @@ export default function Ventas() {
       const newVenta = await response.json();
       setVentas((prevVentas) => [...prevVentas, newVenta]);
       setIsCreating(false);
+      window.location.reload();
     } catch (error) {
       setErrorMessage(error.message);
     }

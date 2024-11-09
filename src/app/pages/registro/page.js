@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 
 export default function Register() {
@@ -10,6 +10,9 @@ export default function Register() {
     confirmPassword: ''
   });
 
+  const [mensaje, setMensaje] = useState('');
+  const [error, setError] = useState('');
+
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
@@ -20,7 +23,7 @@ export default function Register() {
 
     // Validar contraseñas
     if (formData.password !== formData.confirmPassword) {
-      alert('Las contraseñas no coinciden');
+      setError('Las contraseñas no coinciden');
       return;
     }
 
@@ -42,25 +45,28 @@ export default function Register() {
       });
 
       const result = await response.json();
-      alert(result.message);
-
       if (response.ok) {
-        window.location.href = '/page.js';
+        setMensaje(result.message);
+        setError('');
+        setTimeout(() => {
+          window.location.href = '/page.js';
+        }, 1500);
+      } else {
+        setError(result.message || 'Ocurrió un error al registrar el usuario');
+        setMensaje('');
       }
-
     } catch (error) {
       console.error('Error en el registro:', error);
+      setError('Error al conectar con el servidor');
+      setMensaje('');
     }
-
-
-
   };
 
   return (
-    <div className=" h-screen flex flex-col w-full align-middle  ">
-      <div className="w-full  flex flex-col justify-start items-center mb-0 p-0">
+    <div className="h-screen flex flex-col w-full align-middle">
+      <div className="w-full flex flex-col justify-start items-center mb-0 p-0">
         <h1 className="text-gray-600 text-4xl font-bold">Bienvenido a CLIN MED CRM!</h1>
-        <div className="w-[7rem] h-[10rem] bg-[url('/clinmed.png')] bg-contain bg-no-repeat bg-center "></div>
+        <div className="w-[7rem] h-[10rem] bg-[url('/clinmed.png')] bg-contain bg-no-repeat bg-center"></div>
       </div>
 
       <div className="w-full flex justify-center items-center">
@@ -135,6 +141,8 @@ export default function Register() {
               required
             />
           </div>
+          {mensaje && <div className="text-green-600 text-sm">{mensaje}</div>}
+          {error && <div className="text-red-600 text-sm">{error}</div>}
           <div className="flex items-center justify-center">
             <button
               className="bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
