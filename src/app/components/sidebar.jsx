@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import DashBoardItem from "./dashboardItem";
+import Clock from "./Clock"; // Importa el componente de reloj
 
 export default function Sidebar() {
     return (
@@ -14,24 +15,22 @@ export default function Sidebar() {
                     {/* Analytics Section */}
                     <div className="space-y-3">
                         <label className="px-3 text-xs text-gray-500 uppercase">Analytics</label>
-                        <DashBoardItem nombre = "Estadísticas" url="#" icon="/stats.gif" />
-                        <DashBoardItem nombre = "Formularios de satisfaccion" url="/pages/formularios" icon="/survey.gif" />
-
+                        <DashBoardItem nombre="Estadísticas" url="#" icon="/stats.gif" />
+                        <DashBoardItem nombre="Formularios de satisfaccion" url="/pages/formularios" icon="/survey.gif" />
                     </div>
                     {/* Content Section */}
                     <div className="space-y-3">
                         <label className="px-3 text-xs text-gray-500 uppercase">Content</label>
-                        <DashBoardItem nombre = "Pacientes" url="/pages/pacientes" icon="/costumers.gif" />
-                        <DashBoardItem nombre = "Servicios" url="/pages/servicios" icon="/services.gif" />
-                        <DashBoardItem nombre = "Citas" url="/pages/citas" icon="/appointment.gif" />
-                        <DashBoardItem nombre = "Interacciones" url="/pages/interacciones" icon="/interaction.gif" />
-                        <DashBoardItem nombre = "Empresas" url="/pages/empresas" icon="/enterprise-architecture.gif" />
-                        <DashBoardItem nombre = "Contactos" url="/pages/contactos" icon="/contacts.gif" />
-
-
+                        <DashBoardItem nombre="Pacientes" url="/pages/pacientes" icon="/costumers.gif" />
+                        <DashBoardItem nombre="Servicios" url="/pages/servicios" icon="/services.gif" />
+                        <DashBoardItem nombre="Citas" url="/pages/citas" icon="/appointment.gif" />
+                        <DashBoardItem nombre="Interacciones" url="/pages/interacciones" icon="/interaction.gif" />
+                        <DashBoardItem nombre="Empresas" url="/pages/empresas" icon="/enterprise-architecture.gif" />
+                        <DashBoardItem nombre="Contactos" url="/pages/contactos" icon="/contacts.gif" />
                     </div>
                 </nav>
             </div>
+
         </aside>
     );
 }
