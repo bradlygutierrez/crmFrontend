@@ -61,12 +61,12 @@ const PieChartComponent = () => {
                             },
                         },
                         cutout: '70%', // Ajuste para mostrar el centro vacío
-                    }}
+                    }} 
                 />
                 {/* Texto en el centro del gráfico */}
                 <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center">
-                        <p className="text-2xl font-bold">{Math.round(porcentajeConCita)}%</p>
+                        <p className="text-gray-500 text-2xl font-bold">{Math.round(porcentajeConCita)}%</p>
                         <p className="text-sm text-gray-500">Total de citas por paciente</p>
                     </div>
                 </div>
