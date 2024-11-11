@@ -31,7 +31,8 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (res.ok && data.message === "Login exitoso") {
-        console.log("Usuario autenticado:", data.user);
+        console.log(data)
+        console.log("Usuario autenticado:", data.usuario);
         // Redirige a la página de inicio
         router.push("/pages/inicio");
       } else {

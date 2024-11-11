@@ -1,9 +1,7 @@
-// Clientes.js
 'use client';
 import { useEffect, useState } from 'react';
-import DataDisplay from '@/app/components/dataDisplay';
-import EditCreateButton from '@/app/components/CreateButton';
-import FormPopupTickets from '@/app/components/FormPopupTickets'
+import DataDisplayTickets from '@/app/components/dataDisplayTickets';
+import FormPopupTickets from '@/app/components/FormPopupTickets';
 import TableSkeleton from '@/app/components/TableLoadingSkeleton';
 
 export default function Tickets() {
@@ -16,7 +14,9 @@ export default function Tickets() {
   useEffect(() => {
     async function fetchTickets() {
       try {
-        const response = await fetch('http://localhost:8000/tickets');
+        const response = await fetch('http://localhost:8000/tickets', {
+          credentials: 'include',
+        });
         if (!response.ok) throw new Error('Error al obtener los datos');
         const data = await response.json();
         setTickets(data);
@@ -30,8 +30,8 @@ export default function Tickets() {
     fetchTickets();
   }, []);
 
-  const handleRowClick = (tickets) => {
-    setSelectedClient(tickets);
+  const handleRowClick = (ticket) => {
+    setSelectedClient(ticket);
     setIsCreating(false); // Edición
     setIsPopupOpen(true);
   };
@@ -48,38 +48,61 @@ export default function Tickets() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          credentials: 'include',
         },
         body: JSON.stringify(data),
       });
-      console.log(data);
 
       if (!response.ok) throw new Error('Error al crear el ticket');
       const newTicket = await response.json();
 
-      // Agregar el nuevo cliente al estado
       setTickets((prevTickets) => [...prevTickets, newTicket]);
       setIsPopupOpen(false);
-      window.location.reload();
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
-  if (loading) return <TableSkeleton></TableSkeleton>;
+  const handleChangeStatus = async (ticketId) => {
+    console.log('Ticket ID seleccionado:', ticketId); 
+    const requestBody = { status: 'Solucionado' }; // Cuerpo de la solicitud
+    console.log('Cuerpo de la solicitud:', requestBody);
+    
+    try {
+      const response = await fetch(`http://localhost:8000/tickets/${ticketId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          credentials: 'include',
+        },
+        body: JSON.stringify(requestBody),
+      });
+  
+      if (!response.ok) throw new Error('Error al cambiar el estado del ticket');
+      //window.location.reload(); // Recargar para mostrar el cambio
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  
+
+  if (loading) return <TableSkeleton />;
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <EditCreateButton nameCreate="Ticket" handleCreate={handleCreateClick} />
-      <DataDisplay title="Tickets" data={tickets} onRowClick={handleRowClick} />
-     
-      <FormPopupTickets
-       isOpen={isPopupOpen}
-       onClose={() => setIsPopupOpen(false)}
-       onSubmit={isCreating ? handleCreateSubmit : handleCreateSubmit}
-       initialValues={isCreating ? null : selectedClient}
-      >
+      <DataDisplayTickets
+        title="Tickets"
+        data={tickets}
+        onRowClick={handleRowClick}
+        onChangeStatus={handleChangeStatus} // Pasamos la función al componente DataDisplay
+      />
 
-      </FormPopupTickets>
+      <FormPopupTickets
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        onSubmit={isCreating ? handleCreateSubmit : handleCreateSubmit}
+        initialValues={isCreating ? null : selectedClient}
+      />
     </div>
   );
 }

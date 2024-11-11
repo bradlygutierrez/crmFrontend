@@ -10,7 +10,6 @@ const UsuarioInfo = () => {
         const response = await fetch('http://localhost:8000/usuario-logeado', {
           method: 'GET',
           credentials: 'include',
-          
         });
         const data = await response.json();
         if (data) {
@@ -28,8 +27,7 @@ const UsuarioInfo = () => {
     return <p>Cargando usuario...</p>;
   }
 
-  console.log(usuario)
-  console.log(usuario.usuario.username)
+
 
   return (
     <div>
