@@ -58,7 +58,7 @@ export default function Sidebar() {
                     {userMenuItems.includes("Estadísticas") && (
                         <div className="space-y-3">
                             <label className="px-3 text-xs text-gray-500 uppercase">Analytics</label>
-                            <DashBoardItem nombre="Estadísticas" url="#" icon="/stats.gif" />
+                            <DashBoardItem nombre="Estadísticas" url="/pages/dashboard" icon="/stats.gif" />
                             <DashBoardItem nombre="Formularios de satisfaccion" url="/pages/formularios" icon="/survey.gif" />
                         </div>
                     )}

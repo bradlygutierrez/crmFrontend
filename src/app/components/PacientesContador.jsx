@@ -33,10 +33,10 @@ const PacienteContador = () => {
     }
 
     return (
-        <div className="bg-white shadow-lg rounded-lg p-6 flex items-center justify-between">
+        <div className="bg-white shadow-lg h-full rounded-lg p-6 flex items-center justify-between">
             <div>
-                <h2 className="text-lg font-semibold">Total de Pacientes Registrados</h2>
-                <p className="text-3xl font-bold">{totalPacientes}</p>
+                <h2 className="text-lg font-semibold text-gray-600">Total de Pacientes Registrados</h2>
+                <p className="text-3xl font-bold text-gray-700">{totalPacientes}</p>
             </div>
             <div className="text-4xl text-green-500">
                 <i className="fas fa-users"></i> {/* Icono de usuarios */}

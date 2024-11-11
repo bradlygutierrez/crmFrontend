@@ -19,7 +19,7 @@ const TicketCounter = () => {
     }, []);
 
     return (
-        <div className="max-w-sm w-full bg-white shadow-lg rounded-lg p-4 mt-4 border-red-400">
+        <div className="max-w-sm w-full h-full bg-white shadow-lg rounded-lg p-4 border-red-400">
             <div className="flex justify-between items-center">
                 <h3 className="text-xl font-bold text-gray-800">Tickets Sin Responder</h3>
                 <div className="text-4xl font-bold text-red-500 drop-shadow-lg">{ticketsPendientes}</div>
