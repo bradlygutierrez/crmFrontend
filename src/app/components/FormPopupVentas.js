@@ -67,6 +67,16 @@ export default function FormPopupCitas({ isOpen, onClose, onSubmit, initialValue
               className="border rounded p-2 w-full text-black"
             />
           </div>
+          <div>
+            <label className="block mb-2 text-black">Usuario:</label>
+            <input
+              type="text"
+              name="estado_cita"
+              required
+              defaultValue={initialValues ? initialValues.nombre_usuario : ''}
+              className="border rounded p-2 w-full text-black"
+            />
+          </div>
           <div className="col-span-2">
             <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
               {initialValues ? "Guardar Cambios" : "Registrar Cita"}

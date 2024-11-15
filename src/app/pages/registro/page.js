@@ -32,7 +32,7 @@ export default function Register() {
       nombre_usuario: `${formData.nombre} ${formData.apellido}`,
       email_usuario: formData.email,
       contraseña: formData.password,
-      rol: 'user' // Puedes cambiar este valor según sea necesario
+      rol: 'Paciente' // Puedes cambiar este valor según sea necesario
     };
 
     try {

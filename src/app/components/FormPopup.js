@@ -22,7 +22,7 @@ export default function FormPopupPacientes({ isOpen, onClose, onSubmit, initialV
               type="text"
               name="nombre_paciente"
               required
-              defaultValue={initialValues ? initialValues.nombre_paciente : ''}
+              defaultValue={initialValues ? initialValues.nombre_paciente:''}
               className="border rounded p-2 w-full text-black"
             />
           </div>
@@ -32,7 +32,7 @@ export default function FormPopupPacientes({ isOpen, onClose, onSubmit, initialV
               type="date"
               name="fecha_nacimiento"
               required
-              defaultValue={initialValues ? initialValues.fecha_nacimiento : ''}
+              defaultValue={initialValues ? initialValues.fecha_nacimiento:''}
               className="border rounded p-2 w-full text-black"
             />
           </div>
@@ -42,7 +42,7 @@ export default function FormPopupPacientes({ isOpen, onClose, onSubmit, initialV
               type="email"
               name="email_paciente"
               required
-              defaultValue={initialValues ? initialValues.email_paciente : ''}
+              defaultValue={initialValues ? initialValues.email_paciente:''}
               className="border rounded p-2 w-full text-black"
             />
           </div>
@@ -51,7 +51,7 @@ export default function FormPopupPacientes({ isOpen, onClose, onSubmit, initialV
             <input
               type="tel"
               name="telefono_paciente"
-              defaultValue={initialValues ? initialValues.telefono_paciente : ''}
+              defaultValue={initialValues ? initialValues.telefono_paciente:''}
               className="border rounded p-2 w-full text-black"
             />
           </div>
@@ -61,7 +61,7 @@ export default function FormPopupPacientes({ isOpen, onClose, onSubmit, initialV
               type="date"
               name="fecha_registro"
               required
-              defaultValue={initialValues ? initialValues.fecha_registro : ''}
+              defaultValue={initialValues ? initialValues.fecha_registro:''}
               className="border rounded p-2 w-full text-black"
             />
           </div>
@@ -69,7 +69,7 @@ export default function FormPopupPacientes({ isOpen, onClose, onSubmit, initialV
             <label className="block mb-2 text-black">Historial Médico:</label>
             <textarea
               name="historial_medico"
-              defaultValue={initialValues ? initialValues.historial_medico : ''}
+              defaultValue={initialValues ? initialValues.historial_medico:''}
               className="border rounded p-2 w-full text-black"
               rows="4"
             />
@@ -78,7 +78,7 @@ export default function FormPopupPacientes({ isOpen, onClose, onSubmit, initialV
             <label className="block mb-2 text-black">Nota del Paciente:</label>
             <textarea
               name="nota_paciente"
-              defaultValue={initialValues ? initialValues.nota_paciente : ''}
+              defaultValue={initialValues ? initialValues.nota_paciente:''}
               className="border rounded p-2 w-full text-black"
               rows="4"
             />

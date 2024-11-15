@@ -16,11 +16,15 @@ export default function Clientes() {
   useEffect(() => {
     async function fetchClientes() {
       try {
-        const response = await fetch('http://localhost:8000/pacientes');
+        const response = await fetch('http://localhost:8000/pacientes',{
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
         if (!response.ok) throw new Error('Error al obtener los datos');
         const data = await response.json();
         setClientes(data);
-      } catch (error) {
+      } catch (error) { 
         console.error('Error:', error);
       } finally {
         setLoading(false);
