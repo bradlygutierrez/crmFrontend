@@ -32,7 +32,7 @@ const Clock = () => {
     };
 
     return (
-        <div className="mt-6 text-sm text-gray-600 text-center">
+        <div className="text-sm text-gray-600 text-center">
             <p>{formatDate(currentTime)}</p>
             <p>{formatTime(currentTime)}</p>
         </div>

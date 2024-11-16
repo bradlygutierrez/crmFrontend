@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import DashBoardItem from "./dashboardItem";
 import CerrarSesionButton from "./cerrarSessionButton";
 import UsuarioInfo from "./UsuarioInfo";
+import Clock from "./clock";
 
 export default function Sidebar() {
     const [usuario, setUsuario] = useState(null);
@@ -115,6 +116,7 @@ export default function Sidebar() {
                         </div>
                     )}
                 </nav>
+                <Clock></Clock>
 
                 <CerrarSesionButton />
             </div>
