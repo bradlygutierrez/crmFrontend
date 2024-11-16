@@ -50,6 +50,8 @@ export default function Productos() {
       setProductos((prevProductos) => prevProductos.map(producto => producto.id_servicio === updatedProducto.id_servicio ? updatedProducto : producto));
       setIsEditing(false);
       setSelectedProducto(null); // Limpiar la selección
+      window.location.reload(); // Recargar para mostrar el cambio
+
     } catch (error) {
       console.error('Error:', error);
     }
@@ -72,6 +74,7 @@ export default function Productos() {
       // Agregar el nuevo producto a la lista
       setProductos((prevProductos) => [...prevProductos, newProducto]);
       setIsCreating(false); // Cerrar el popup
+      window.location.reload(); // Recargar para mostrar el cambio
     } catch (error) {
       console.error('Error:', error);
     }

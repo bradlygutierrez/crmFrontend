@@ -59,9 +59,7 @@ export default function TicketsPaciente() {
     }, [userId]);
 
     const handleRowClick = (tickets) => {
-        setSelectedClient(tickets);
-        setIsCreating(false); // Edición
-        setIsPopupOpen(true);
+       
     };
 
     const handleCreateClick = () => {
@@ -93,6 +91,8 @@ export default function TicketsPaciente() {
             });
 
             setIsPopupOpen(false);
+            window.location.reload(); // Recargar para mostrar el cambio
+            
         } catch (error) {
             console.error('Error:', error);
         }

@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function FormPopupContacto({ isOpen, onClose, onSubmit, initialValues }) {
-  if (!isOpen) return null; // Si no está abierto, no renderizar nada
+  const [empresas, setEmpresas] = useState([]);
+
+  // Cargar empresas al abrir el popup
+  useEffect(() => {
+    if (isOpen) {
+      fetch('http://localhost:8000/empresas')
+        .then((res) => res.json())
+        .then(setEmpresas)
+        .catch((err) => console.error("Error cargando empresas:", err));
+    }
+  }, [isOpen]);
+
+  if (!isOpen) return null; // No renderizar nada si el popup no está abierto
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -22,7 +34,7 @@ export default function FormPopupContacto({ isOpen, onClose, onSubmit, initialVa
               type="text"
               name="nombre_contacto"
               required
-              defaultValue={initialValues ? initialValues.nombre_contacto : ''}
+              defaultValue={initialValues?.nombre_contacto || ''}
               className="border rounded p-2 w-full text-black"
             />
           </div>
@@ -32,7 +44,7 @@ export default function FormPopupContacto({ isOpen, onClose, onSubmit, initialVa
               type="tel"
               name="telefono_contacto"
               required
-              defaultValue={initialValues ? initialValues.telefono_contacto : ''}
+              defaultValue={initialValues?.telefono_contacto || ''}
               className="border rounded p-2 w-full text-black"
             />
           </div>
@@ -42,7 +54,7 @@ export default function FormPopupContacto({ isOpen, onClose, onSubmit, initialVa
               type="email"
               name="email_contacto"
               required
-              defaultValue={initialValues ? initialValues.email_contacto : ''}
+              defaultValue={initialValues?.email_contacto || ''}
               className="border rounded p-2 w-full text-black"
             />
           </div>
@@ -52,19 +64,25 @@ export default function FormPopupContacto({ isOpen, onClose, onSubmit, initialVa
               type="text"
               name="cargo"
               required
-              defaultValue={initialValues ? initialValues.cargo : ''}
+              defaultValue={initialValues?.cargo || ''}
               className="border rounded p-2 w-full text-black"
             />
           </div>
           <div>
             <label className="block mb-2 text-black">Nombre de la Empresa:</label>
-            <input
-              type="text"
+            <select
               name="nombre_empresa"
               required
-              defaultValue={initialValues ? initialValues.nombre_empresa : ''}
+              defaultValue={initialValues?.nombre_empresa || ''}
               className="border rounded p-2 w-full text-black"
-            />
+            >
+              <option value="" disabled>Selecciona una empresa</option>
+              {empresas.map((empresa) => (
+                <option key={empresa.id_empresa} value={empresa.nombre_empresa}>
+                  {empresa.nombre_empresa}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="col-span-2">
             <button type="submit" className="bg-blue-500 text-black px-4 py-2 rounded hover:bg-blue-600">

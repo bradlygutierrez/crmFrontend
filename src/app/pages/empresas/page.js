@@ -48,6 +48,7 @@ export default function Empresa() {
       setEmpresas((prevEmpresas) => prevEmpresas.map(emp => emp.id_empresa === updatedEmpresa.id_empresa ? updatedEmpresa : emp));
       setIsEditing(false);
       setSelectedEmpresa(null);
+      window.location.reload(); // Recargar para mostrar el cambio
     } catch (error) {
       console.error('Error:', error);
     }

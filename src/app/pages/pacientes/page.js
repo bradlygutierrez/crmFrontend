@@ -64,6 +64,8 @@ export default function Clientes() {
         prevClientes.map(client => client.id_paciente === updatedClient.id_paciente ? updatedClient : client)
       );
       setIsPopupOpen(false);
+      window.location.reload(); // Recargar para mostrar el cambio
+
     } catch (error) {
       console.error('Error:', error);
     }

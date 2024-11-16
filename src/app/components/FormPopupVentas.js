@@ -1,7 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function FormPopupCitas({ isOpen, onClose, onSubmit, initialValues }) {
-  if (!isOpen) return null; // Si no está abierto, no renderizar nada
+  const [pacientes, setPacientes] = useState([]);
+  const [servicios, setServicios] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
+
+  // Cargar datos al abrir el popup
+  useEffect(() => {
+    if (isOpen) {
+      fetch('http://localhost:8000/pacientes')
+        .then((res) => res.json())
+        .then(setPacientes)
+        .catch((err) => console.error("Error cargando pacientes:", err));
+
+      fetch('http://localhost:8000/servicios')
+        .then((res) => res.json())
+        .then(setServicios)
+        .catch((err) => console.error("Error cargando servicios:", err));
+
+      fetch('http://localhost:8000/usuarios')
+        .then((res) => res.json())
+        .then(setUsuarios)
+        .catch((err) => console.error("Error cargando usuarios:", err));
+    }
+  }, [isOpen]);
+
+  if (!isOpen) return null; // No renderizar nada si el popup no está abierto
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -18,23 +42,35 @@ export default function FormPopupCitas({ isOpen, onClose, onSubmit, initialValue
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block mb-2 text-black">Nombre del Paciente:</label>
-            <input
-              type="text"
+            <select
               name="nombre_paciente"
               required
-              defaultValue={initialValues ? initialValues.nombre_paciente : ''}
+              defaultValue={initialValues?.id_paciente || ''}
               className="border rounded p-2 w-full text-black"
-            />
+            >
+              <option value="" disabled>Selecciona un paciente</option>
+              {pacientes.map((paciente) => (
+                <option key={paciente.nombre_paciente} value={paciente.nombre_paciente}>
+                  {paciente.nombre_paciente}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label className="block mb-2 text-black">Nombre del Servicio:</label>
-            <input
-              type="text"
+            <select
               name="nombre_servicio"
               required
-              defaultValue={initialValues ? initialValues.nombre_servicio : ''}
+              defaultValue={initialValues?.id_servicio || ''}
               className="border rounded p-2 w-full text-black"
-            />
+            >
+              <option value="" disabled>Selecciona un servicio</option>
+              {servicios.map((servicio) => (
+                <option key={servicio.nombre_servicio} value={servicio.nombre_servicio}>
+                  {servicio.nombre_servicio}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label className="block mb-2 text-black">Fecha de Cita:</label>
@@ -42,7 +78,7 @@ export default function FormPopupCitas({ isOpen, onClose, onSubmit, initialValue
               type="date"
               name="fecha_cita"
               required
-              defaultValue={initialValues ? initialValues.fecha_cita : ''}
+              defaultValue={initialValues?.fecha_cita || ''}
               className="border rounded p-2 w-full text-black"
             />
           </div>
@@ -52,30 +88,36 @@ export default function FormPopupCitas({ isOpen, onClose, onSubmit, initialValue
               type="time"
               name="hora_cita"
               required
-              defaultValue={initialValues ? initialValues.hora_cita : ''}
+              defaultValue={initialValues?.hora_cita || ''}
               className="border rounded p-2 w-full text-black"
             />
           </div>
-          
           <div>
             <label className="block mb-2 text-black">Estado de Cita:</label>
             <input
               type="text"
               name="estado_cita"
               required
-              defaultValue={initialValues ? initialValues.estado_cita : ''}
+              defaultValue={initialValues?.estado_cita || ''}
               className="border rounded p-2 w-full text-black"
             />
           </div>
           <div>
             <label className="block mb-2 text-black">Usuario:</label>
-            <input
-              type="text"
-              name="estado_cita"
+            <select
+              name="nombre_usuario"
               required
-              defaultValue={initialValues ? initialValues.nombre_usuario : ''}
+              defaultValue={initialValues?.id_usuario || ''}
               className="border rounded p-2 w-full text-black"
-            />
+            >
+              <option value="" disabled>Selecciona un usuario</option>
+              console.log(usuarios)
+              {usuarios.map((usuario) => (
+                <option key={usuario.nombre_usuario} value={usuario.nombre_usuario}>
+                  {usuario.nombre_usuario}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="col-span-2">
             <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">

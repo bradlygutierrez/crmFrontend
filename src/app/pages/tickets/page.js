@@ -58,6 +58,7 @@ export default function Tickets() {
 
       setTickets((prevTickets) => [...prevTickets, newTicket]);
       setIsPopupOpen(false);
+      window.location.reload(); // Recargar para mostrar el cambio
     } catch (error) {
       console.error('Error:', error);
     }
@@ -79,7 +80,7 @@ export default function Tickets() {
       });
   
       if (!response.ok) throw new Error('Error al cambiar el estado del ticket');
-      //window.location.reload(); // Recargar para mostrar el cambio
+      window.location.reload(); // Recargar para mostrar el cambio
     } catch (error) {
       console.error('Error:', error);
     }

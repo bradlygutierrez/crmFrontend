@@ -33,11 +33,11 @@ export default function Sidebar() {
 
     // Definir los módulos según el rol
     const menuItems = {
-        Analista: ["Estadísticas", "Formularios de satisfaccion", "Interacciones", "Pacientes", "Empresas", "Contactos"],
+        Analista: ["Estadísticas", "Interacciones", "Pacientes", "Empresas", "Contactos"],
         Doctor: ["Citas", "Pacientes", "Interacciones"],
-        Soporte: ["Estadísticas", "Formularios de satisfaccion", "Interacciones", "Pacientes", "Empresas", "Contactos", "Citas", "Tickets"],
-        Paciente: ["Citas", "Tickets"], // Paciente tendrá rutas diferentes
-        Propietario: ["Estadísticas", "Formularios de satisfaccion", "Interacciones", "Pacientes", "Empresas", "Contactos", "Citas", "Tickets"]
+        Soporte: ["Estadísticas", "Interacciones", "Pacientes", "Empresas", "Contactos", "Citas", "Tickets", "Servicios"],
+        Paciente: ["Citas", "Tickets", "Formularios de satisfaccion"], // Paciente tendrá rutas diferentes
+        Propietario: ["Estadísticas", "Interacciones", "Pacientes", "Empresas", "Contactos", "Citas", "Tickets", "Servicios"]
     };
 
     // Obtener el rol del usuario
@@ -63,6 +63,14 @@ export default function Sidebar() {
                         </div>
                     )}
 
+                    {/* Mostrar "Formulario de Satisfacción" solo para Pacientes */}
+                    {userMenuItems.includes("Formularios de satisfaccion") && (
+                        <div className="space-y-3">
+                            <label className="px-3 text-xs text-gray-500 uppercase">Formulario</label>
+                            <DashBoardItem nombre="Formulario de Satisfacción" url="/pages/crearFormulario" icon="/survey.gif" />
+                        </div>
+                    )}
+
                     {/* Tickets - Verifica si el usuario es Paciente */}
                     {userMenuItems.includes("Tickets") && (
                         <div className="space-y-3">
@@ -82,7 +90,6 @@ export default function Sidebar() {
                             {userMenuItems.includes("Pacientes") && (
                                 <DashBoardItem nombre="Pacientes" url="/pages/pacientes" icon="/costumers.gif" />
                             )}
-                            {/* Citas - Verifica si el usuario es Paciente */}
                             {userMenuItems.includes("Citas") && (
                                 rol === "Paciente" ? (
                                     <DashBoardItem nombre="Citas" url="/pages/citaPaciente" icon="/appointment.gif" />
@@ -96,6 +103,12 @@ export default function Sidebar() {
                             {userMenuItems.includes("Empresas") && (
                                 <DashBoardItem nombre="Empresas" url="/pages/empresas" icon="/enterprise-architecture.gif" />
                             )}
+                            {/* Servicios - Agregar este ítem */}
+                            {userMenuItems.includes("Servicios") && (
+                                <div className="space-y-3">
+                                    <DashBoardItem nombre="Servicios" url="/pages/servicios" icon="/services.gif" />
+                                </div>
+                            )}
                             {userMenuItems.includes("Contactos") && (
                                 <DashBoardItem nombre="Contactos" url="/pages/contactos" icon="/contacts.gif" />
                             )}
@@ -105,7 +118,6 @@ export default function Sidebar() {
 
                 <CerrarSesionButton />
             </div>
-
         </aside>
     );
 }

@@ -49,6 +49,7 @@ export default function Contacto() {
       setContactos((prevContactos) => prevContactos.map(cont => cont.id_contacto === updatedContacto.id_contacto ? updatedContacto : cont));
       setIsEditing(false);
       setSelectedContacto(null);
+      window.location.reload(); // Recargar para mostrar el cambio
     } catch (error) {
       console.error('Error:', error);
     }
@@ -64,7 +65,7 @@ export default function Contacto() {
         body: JSON.stringify(data),
       });
       console.log(data)
-
+      window.location.reload(); // Recargar para mostrar el cambio
       if (!response.ok) {
         throw new Error('Error al crear el contacto');
       }

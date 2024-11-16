@@ -50,6 +50,7 @@ export default function Ventas() {
       setVentas((prevVentas) => prevVentas.map(venta => venta.id_cita === updatedVenta.id_cita ? updatedVenta : venta));
       setIsEditing(false);
       setSelectedVenta(null); // Limpiar la selección
+      window.location.reload(); // Recargar para mostrar el cambio
     } catch (error) {
       console.error('Error:', error);
     }
@@ -65,7 +66,7 @@ export default function Ventas() {
         },
         body: JSON.stringify(data), // Envía 'data' directamente
       });
-
+      window.location.reload(); // Recargar para mostrar el cambio
       console.log(data); // Agrega esta línea para verificar los datos enviados
 
       if (!response.ok) {

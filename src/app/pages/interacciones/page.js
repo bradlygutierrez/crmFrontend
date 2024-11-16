@@ -6,7 +6,7 @@ import FormPopup from '@/app/components/FormPopupInteracciones'; // Asegúrate d
 import EditCreateButton from '@/app/components/CreateButton'; // Asegúrate de importar el botón adecuado
 
 export default function Interacciones() {
-  const [interacciones, setInteracciones] = useState([]);
+  const [interacciones, setInteracciones] = useState([]); // Inicializado como un arreglo vacío
   const [selectedInteraccion, setSelectedInteraccion] = useState(null); // Estado para la fila seleccionada
   const [isEditing, setIsEditing] = useState(false); // Estado para controlar el popup de edición
   const [isCreating, setIsCreating] = useState(false); // Estado para controlar el popup de creación
@@ -15,7 +15,13 @@ export default function Interacciones() {
     async function fetchInteracciones() {
       const response = await fetch('http://localhost:8000/interacciones'); // Cambia la URL por tu API real
       const data = await response.json();
-      setInteracciones(data);
+      // Verificar que la respuesta sea un array antes de setear el estado
+      if (Array.isArray(data)) {
+        setInteracciones(data);
+      } else {
+        console.error('Error: la respuesta de la API no es un arreglo');
+        setInteracciones([]); // Si no es un array, se pone un arreglo vacío para evitar errores
+      }
     }
 
     fetchInteracciones();
@@ -47,9 +53,14 @@ export default function Interacciones() {
       }
       const updatedInteraccion = await response.json();
       // Actualiza la lista de interacciones
-      setInteracciones((prevInteracciones) => prevInteracciones.map(inter => inter.id_interaccion === updatedInteraccion.id_interaccion ? updatedInteraccion : inter));
+      setInteracciones((prevInteracciones) =>
+        prevInteracciones.map(inter =>
+          inter.id_interaccion === updatedInteraccion.id_interaccion ? updatedInteraccion : inter
+        )
+      );
       setIsEditing(false);
       setSelectedInteraccion(null); // Limpiar la selección
+      window.location.reload(); // Recargar para mostrar el cambio
     } catch (error) {
       console.error('Error:', error);
     }
@@ -70,9 +81,9 @@ export default function Interacciones() {
       }
       const newInteraccion = await response.json();
       // Agregar la nueva interacción a la lista
-      setInteracciones((prevInteracciones) => [...prevInteracciones, newInteraccion]);
+      setInteracciones((prevInteracciones = []) => [...prevInteracciones, newInteraccion]);
       setIsCreating(false); // Cerrar el popup
-      window.location.reload();
+      window.location.reload(); // Si quieres recargar la página
     } catch (error) {
       console.error('Error:', error);
     }
@@ -80,10 +91,10 @@ export default function Interacciones() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <EditCreateButton 
-        nameCreate="Interacción" 
-        handleCreate={handleCreateClick} 
-        handleEdit={() => setIsEditing(true)} 
+      <EditCreateButton
+        nameCreate="Interacción"
+        handleCreate={handleCreateClick}
+        handleEdit={() => setIsEditing(true)}
       />
       <div className="w-1/2 h-full">
         <p className="text-sm text-black">
