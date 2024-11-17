@@ -1,10 +1,10 @@
-// Clientes.js
 'use client';
 import { useEffect, useState } from 'react';
 import DataDisplay from '@/app/components/dataDisplay';
 import EditCreateButton from '@/app/components/CreateButton';
 import FormPopup from '@/app/components/FormPopup'; // Asegúrate de que esto apunta a tu componente de formulario
 import TableSkeleton from '@/app/components/TableLoadingSkeleton';
+import PacientesExportButtons from '@/app/components/pacientesExportButtons'; // Importamos el componente de exportación
 
 export default function Clientes() {
   const [clientes, setClientes] = useState([]);
@@ -16,7 +16,7 @@ export default function Clientes() {
   useEffect(() => {
     async function fetchClientes() {
       try {
-        const response = await fetch('http://localhost:8000/pacientes',{
+        const response = await fetch('http://localhost:8000/pacientes', {
           headers: {
             'Content-Type': 'application/json',
           }
@@ -24,7 +24,7 @@ export default function Clientes() {
         if (!response.ok) throw new Error('Error al obtener los datos');
         const data = await response.json();
         setClientes(data);
-      } catch (error) { 
+      } catch (error) {
         console.error('Error:', error);
       } finally {
         setLoading(false);
@@ -98,6 +98,7 @@ export default function Clientes() {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <EditCreateButton nameCreate="Paciente" handleCreate={handleCreateClick} />
+      
       <DataDisplay title="Pacientes" data={clientes} onRowClick={handleRowClick} />
       <FormPopup
         isOpen={isPopupOpen}
@@ -105,6 +106,8 @@ export default function Clientes() {
         onSubmit={isCreating ? handleCreateSubmit : handleEditSubmit}
         initialValues={isCreating ? null : selectedClient}
       />
+      {/* Botones de exportación */}
+      <PacientesExportButtons data={clientes} /> 
     </div>
   );
 }

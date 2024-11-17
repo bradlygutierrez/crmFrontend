@@ -7,6 +7,8 @@ import TicketCounter from '@/app/components/TicketCounter';
 import PacienteContador from '@/app/components/PacientesContador';
 import PacienteMesContador from '@/app/components/PacientesDelMesContador';
 import CitaContador from '@/app/components/CitaContador';
+import OportunidadesVentasWidget from '@/app/components/OportunidadesVemtasWidget';
+import ExportButtons from '@/app/components/exportButtons';
 
 const Dashboard = () => {
     return (
@@ -40,14 +42,7 @@ const Dashboard = () => {
                         <BarChartComponent />
                     </div>
                     <div className="min-h-[24rem] w-[30%] bg-[#FFF8F8] p-4 rounded-xl shadow">
-                        <h2 className="text-xl font-semibold text-gray-700">Oportunidades de ventas</h2>
-                        <h2 className='text-xl font-semibold mb-4 text-gray-700'>(pacientes con un año sin volver)</h2>
-                        <ul className="text-gray-700">
-                            <li>Paciente: José, checkeo en: 2 Días</li>
-                            <li>Paciente: Ana, checkeo en: 3 Días</li>
-                            <li>Paciente: Ana, checkeo en: 5 Días</li>
-                            <li>Paciente: Ana, checkeo en: 4 Días</li>
-                        </ul>
+                        <OportunidadesVentasWidget />
                     </div>
                 </nav>
 
@@ -62,8 +57,7 @@ const Dashboard = () => {
 
             {/* Botones de exportación */}
             <div className="flex justify-end mt-6 space-x-4">
-                <button className="bg-red-500 text-white px-4 py-2 rounded">Exportar Reporte Como PDF</button>
-                <button className="bg-green-500 text-white px-4 py-2 rounded">Exportar Reporte Como Excel</button>
+                <ExportButtons />
             </div>
         </div>
     );
