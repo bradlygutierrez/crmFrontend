@@ -25,13 +25,13 @@ const OportunidadesVentasWidget = () => {
 
   return (
     <div className="p-4 bg-gray-100 rounded shadow">
-      <h3 className="text-lg font-semibold mb-2">
+      <h3 className="text-lg font-semibold mb-2 text-gray-700">
         Oportunidades de ventas (pacientes con chequeos pendientes)
       </h3>
       {pacientes.length > 0 ? (
         <ul>
           {pacientes.map((paciente, index) => (
-            <li key={index}>
+            <li key={index} className="text-base font-ligth mb-2 text-gray-500">
               Paciente: <strong>{paciente.nombre_paciente}</strong>, última cita:{' '}
               <strong>
                 {paciente.ultima_cita
