@@ -12,6 +12,8 @@ export default function Register() {
 
   const [mensaje, setMensaje] = useState('');
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -20,6 +22,9 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (isSubmitting) return; // Prevenir múltiples envíos
+    setIsSubmitting(true);
 
     // Validar contraseñas
     if (formData.password !== formData.confirmPassword) {
@@ -49,7 +54,7 @@ export default function Register() {
         setMensaje(result.message);
         setError('');
         setTimeout(() => {
-          window.location.href = '/page.js';
+          window.location.href = '/';
         }, 1500);
       } else {
         setError(result.message || 'Ocurrió un error al registrar el usuario');
@@ -154,6 +159,6 @@ export default function Register() {
         </form>
       </div>
     </div>
-    
+
   );
 }

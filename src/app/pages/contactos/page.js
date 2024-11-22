@@ -40,7 +40,7 @@ export default function Contacto() {
         },
         body: JSON.stringify(data),
       });
-      
+
 
       if (!response.ok) {
         throw new Error('Error al actualizar los datos');
@@ -72,7 +72,12 @@ export default function Contacto() {
       const newContacto = await response.json();
       setContactos((prevContactos) => [...prevContactos, newContacto]);
       setIsCreating(false);
-      window.location.reload();
+
+      if (response.ok == true) {
+        window.location.reload();
+
+      }
+
     } catch (error) {
       console.error('Error:', error);
     }
@@ -80,10 +85,10 @@ export default function Contacto() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <EditCreateButton 
-        nameCreate="Contacto" 
-        handleCreate={handleCreateClick} 
-        handleEdit={() => setIsEditing(true)} 
+      <EditCreateButton
+        nameCreate="Contacto"
+        handleCreate={handleCreateClick}
+        handleEdit={() => setIsEditing(true)}
       />
       <DataDisplay title="Contactos" data={contactos} onRowClick={handleRowClick} />
       <FormPopup
@@ -96,7 +101,7 @@ export default function Contacto() {
         isOpen={isCreating}
         onClose={() => setIsCreating(false)}
         onSubmit={handleCreateSubmit}
-        initialValues={selectedContacto} 
+        initialValues={selectedContacto}
       />
     </div>
   );

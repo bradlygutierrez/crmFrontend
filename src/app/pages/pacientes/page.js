@@ -87,7 +87,10 @@ export default function Clientes() {
       // Agregar el nuevo cliente al estado
       setClientes((prevClientes) => [...prevClientes, newClient]);
       setIsPopupOpen(false);
-      window.location.reload();
+
+      if(response.ok){
+        window.location.reload();
+      }
     } catch (error) {
       console.error('Error:', error);
     }

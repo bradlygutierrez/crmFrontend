@@ -65,11 +65,11 @@ export default function FormPopupCitas({ isOpen, onClose, onSubmit, initialValue
               className="border rounded p-2 w-full text-black"
             >
               <option value="" disabled>Selecciona un servicio</option>
-              {servicios.map((servicio) => (
+              {servicios.length > 0 ? servicios.map((servicio) => (
                 <option key={servicio.nombre_servicio} value={servicio.nombre_servicio}>
                   {servicio.nombre_servicio}
                 </option>
-              ))}
+              )) : <p> No hay servicios disponibles</p>}
             </select>
           </div>
           <div>
@@ -94,29 +94,33 @@ export default function FormPopupCitas({ isOpen, onClose, onSubmit, initialValue
           </div>
           <div>
             <label className="block mb-2 text-black">Estado de Cita:</label>
-            <input
-              type="text"
+            <select
               name="estado_cita"
               required
               defaultValue={initialValues?.estado_cita || ''}
               className="border rounded p-2 w-full text-black"
-            />
+            >
+              <option value="" disabled>Selecciona un estado</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="agendada">Agendada</option>
+              <option value="confirmada">Confirmada</option>
+            </select>
           </div>
           <div>
-            <label className="block mb-2 text-black">Usuario:</label>
+            <label className="block mb-2 text-black">Usuario (Suele ser el mismo nombre del paciente) :</label>
             <select
               name="nombre_usuario"
               required
               defaultValue={initialValues?.id_usuario || ''}
               className="border rounded p-2 w-full text-black"
             >
-              <option value="" disabled>Selecciona un usuario</option>
+              <option value="" disabled>Selecciona un usuario </option>
               console.log(usuarios)
-              {usuarios.map((usuario) => (
+              {usuarios.length > 0 ? usuarios.map((usuario) => (
                 <option key={usuario.nombre_usuario} value={usuario.nombre_usuario}>
                   {usuario.nombre_usuario}
                 </option>
-              ))}
+              )) : <p>No hay usuarios disponibles</p>}
             </select>
           </div>
           <div className="col-span-2">

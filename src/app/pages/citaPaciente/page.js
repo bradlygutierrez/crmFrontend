@@ -13,13 +13,9 @@ export default function CituasUsaurio() {
       }); // Cambia la URL por tu API real
       const data = await response.json();
       setCitas(data);
-      
     }
-
     fetchCitas();
   }, []);
-
-  
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">

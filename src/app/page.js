@@ -125,7 +125,7 @@ export default function LoginPage() {
             </p>
             <p className="text-sm text-gray-600">
               ¿Has olvidado tu contraseña?{" "}
-              <Link href="#" className="text-blue-600">
+              <Link href="/pages/passwordRecovery" className="text-blue-600">
                 Olvidé mi contraseña
               </Link>
             </p>

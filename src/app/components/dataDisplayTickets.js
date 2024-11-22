@@ -21,7 +21,7 @@ const DataDisplayTickets = ({ title, data, onRowClick, onChangeStatus }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => (
+            {data.length >= 0 ? data.map((item, index) => (
               <tr
                 key={index}
                 className="hover:bg-gray-50 cursor-pointer"
@@ -53,7 +53,7 @@ const DataDisplayTickets = ({ title, data, onRowClick, onChangeStatus }) => {
                   </button>
                 </td>
               </tr>
-            ))}
+            )): <p> No data available</p>}
           </tbody>
         </table>
       </div>
