@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
   const pathname = usePathname(); // Solo una vez
 
   // Rutas donde no queremos mostrar el Sidebar
-  const noSidebarRoutes = ["/pages/registro", "/pages/passwordRecovery"];
+  const noSidebarRoutes = ["/pages/registro", "/pages/passwordRecovery", "/"];
 
   return (
     <html lang="en">

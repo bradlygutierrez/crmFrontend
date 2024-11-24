@@ -31,14 +31,14 @@ export default function Sidebar() {
         return <p>Cargando usuario...</p>;
     }
 
-    // Validar si no hay usuario logueado o el rol es null
+/*     // Validar si no hay usuario logueado o el rol es null
     if (!usuario.usuario || !usuario.usuario.rol) {
         return (
             <div className="text-xl text-gray-900 text-center">
                 ¡Ups! Parece que no te encontramos como usuario.
             </div>
         );
-    }
+    } */
 
 
     // Definir los módulos según el rol

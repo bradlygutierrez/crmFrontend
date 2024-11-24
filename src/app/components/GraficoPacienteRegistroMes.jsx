@@ -80,7 +80,7 @@ const BarChartComponent = () => {
                         },
                         tooltip: {
                             callbacks: {
-                                label: (tooltipItem) => `${tooltipItem.raw}%`,
+                                label: (tooltipItem) => `${tooltipItem.raw}`,
                             },
                             backgroundColor: '#000', // Fondo negro para el tooltip
                             titleColor: '#fff',
