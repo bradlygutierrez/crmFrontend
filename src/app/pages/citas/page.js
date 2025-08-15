@@ -13,7 +13,7 @@ export default function Ventas() {
 
   useEffect(() => {
     async function fetchVentas() {
-      const response = await fetch('http://localhost:8000/citas'); // Cambia la URL por tu API real
+      const response = await fetch('http://localhost:8000/citas');
       const data = await response.json();
       setVentas(data);
     }
